@@ -1,0 +1,20 @@
+export { };
+
+type Tname = string | null;
+
+let name: Tname = null;
+
+name = 'HungNV';
+
+//console.log(name);
+
+const printName = (name: Tname) => {
+	//console.log(name?.toUpperCase() ?? 'Anonymous');
+	if(name){
+		console.log(name.toUpperCase());
+	}else{
+		console.log('Anonymous');	
+	}
+};
+
+printName(name);
