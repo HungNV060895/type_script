@@ -8,3 +8,15 @@ btn?.addEventListener('click', () => {
     alert(input?.value);
 });
 export {};
+// interface IUser {
+//     id: number,
+//     email: string,
+//     name: string,
+// }
+// const fetchUser = async() => {
+//     const res = await fetch('http://localhost:8000/users');
+//     // const data = (await res.json()) as IUser[];
+//     const data: IUser[] = await res.json();
+//     console.log(data[0].email);
+// }
+// fetchUser();
