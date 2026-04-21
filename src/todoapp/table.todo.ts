@@ -3,6 +3,9 @@ import { Todo } from "./main.js";
 const todoData = JSON.parse(localStorage.getItem('todos') || '[]');
 const displayTable = () => {
     const tableTodo = document.getElementById('totoTable') as HTMLTableElement;
+    if(todoData.length === 0){
+        tableTodo.innerHTML = 'Empty Task';
+    }
     todoData.forEach((item: Todo) => {
         tableTodo.insertAdjacentHTML('beforeend', 
             `<tr>

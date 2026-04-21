@@ -1,8 +1,8 @@
 const toastDelete = new bootstrap.Toast(document.getElementById('deleteSuccess'), {
     delay: 1000
 });
+const tableTodo = document.getElementById('totoTable');
 const handleDelete = () => {
-    const tableTodo = document.getElementById('totoTable');
     tableTodo.addEventListener('click', (e) => {
         const target = e.target;
         if (!target.classList.contains('btn-delete'))

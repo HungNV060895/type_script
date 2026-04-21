@@ -41,6 +41,7 @@ btnAdd?.addEventListener('click', () => {
         }
         toastAdd.show();
         modal.hide();
+        tableTodo.innerHTML = '';
         addRowWidthJs(todo);
     }
 });

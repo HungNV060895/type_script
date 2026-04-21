@@ -67,10 +67,10 @@ btnAdd?.addEventListener('click', () => {
         }
         toastAdd.show();
         modal.hide();
+        tableTodo.innerHTML = '';
         addRowWidthJs(todo);
     }
 })
-
 
 const addRowWidthJs = (data: Todo) => {
     const row = document.createElement('tr');
