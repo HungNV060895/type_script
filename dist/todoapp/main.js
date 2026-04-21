@@ -1,3 +1,5 @@
+import { displayTable } from "./table.todo.js";
+import { handleDelete } from "./delete.todo.js";
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -5,7 +7,11 @@ function getRandomInt(min, max) {
 }
 const btnAdd = document.getElementById('addTodo');
 const txtTodo = document.getElementById('txtTodo');
+const toastAdd = new bootstrap.Toast(document.getElementById('addSuccess'), {
+    delay: 1000
+});
 const tableTodo = document.getElementById('totoTable');
+const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
 const handleResetInput = () => {
     txtTodo.value = '';
 };
@@ -33,25 +39,15 @@ btnAdd?.addEventListener('click', () => {
         else {
             localStorage.setItem('todos', JSON.stringify([todo]));
         }
-        window.location.reload();
+        toastAdd.show();
+        modal.hide();
+        addRowWidthJs(todo);
     }
 });
-const todoData = JSON.parse(localStorage.getItem('todos') || '[]');
-todoData.forEach((item) => {
-    tableTodo.insertAdjacentHTML('beforeend', `<tr>
-            <td>${item.id}</td>
-            <td>${item.todoName}</td>
-            <td>${item.completed ? 'Yes' : 'No'}</td>
-            <td><button type="button" class="btn btn-danger btn-delete" data-todo="${item.id}">Delete</button></td>
-        </tr>`);
-});
-const btnDelete = document.querySelectorAll('.btn-delete');
-btnDelete.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-todo');
-        const newTodoData = todoData.filter((item) => item.id !== parseInt(id));
-        localStorage.setItem('todos', JSON.stringify(newTodoData));
-        location.reload();
-    });
-});
-export {};
+const addRowWidthJs = (data) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${data.id}</td><td>${data.todoName}</td><td>${data.completed ? 'Yes' : 'No'}</td><td><button type="button" class="btn btn-danger btn-delete" data-todo="${data.id}">Delete</button></td>`;
+    tableTodo.appendChild(row);
+};
+displayTable();
+handleDelete();

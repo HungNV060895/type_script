@@ -1,9 +1,13 @@
+import { displayTable } from "./table.todo.js";
+import { handleDelete } from "./delete.todo.js";
 
 type Todo = {
     id: number,
     todoName: string,
     completed: boolean
 }
+
+declare var bootstrap: any;
 
 
 function getRandomInt(min: number, max: number) {
@@ -15,7 +19,13 @@ function getRandomInt(min: number, max: number) {
 
 const btnAdd = document.getElementById('addTodo') as HTMLButtonElement;
 const txtTodo = document.getElementById('txtTodo') as HTMLInputElement;
+const toastAdd = new bootstrap.Toast(document.getElementById('addSuccess'), {
+    delay: 1000
+});
+
 const tableTodo = document.getElementById('totoTable') as HTMLTableElement;
+
+const modal = new bootstrap.Modal(document.getElementById('exampleModal')!);
 
 
 const handleResetInput = () => {
@@ -51,39 +61,24 @@ btnAdd?.addEventListener('click', () => {
             const arrTodo = JSON.parse(todoStr);
             arrTodo.push(todo);
             localStorage.setItem('todos', JSON.stringify(arrTodo));
+            
         }else{
             localStorage.setItem('todos', JSON.stringify([todo]));
         }
-
-        window.location.reload();
+        toastAdd.show();
+        modal.hide();
+        addRowWidthJs(todo);
     }
 })
 
 
+const addRowWidthJs = (data: Todo) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${data.id}</td><td>${data.todoName}</td><td>${data.completed ? 'Yes' : 'No'}</td><td><button type="button" class="btn btn-danger btn-delete" data-todo="${data.id}">Delete</button></td>`;
+    tableTodo.appendChild(row);
+}
 
+displayTable();
+handleDelete();
 
-const todoData = JSON.parse(localStorage.getItem('todos') || '[]');
-
-todoData.forEach((item: Todo) => {
-    tableTodo.insertAdjacentHTML('beforeend', 
-        `<tr>
-            <td>${item.id}</td>
-            <td>${item.todoName}</td>
-            <td>${item.completed ? 'Yes' : 'No'}</td>
-            <td><button type="button" class="btn btn-danger btn-delete" data-todo="${item.id}">Delete</button></td>
-        </tr>`
-    )
-});
-
-const btnDelete = document.querySelectorAll('.btn-delete');
-
-btnDelete.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-todo') as string;
-        const newTodoData = todoData.filter((item: Todo) => item.id !== parseInt(id));
-        localStorage.setItem('todos', JSON.stringify(newTodoData));
-        location.reload();
-    })
-})
-
-export { }
+export { Todo}
