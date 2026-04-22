@@ -12,98 +12,110 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Blogs</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="container">
-        <!-- header -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="https://hoidanit.vn" target="_blank">@hoidanit</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../home.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="blog.html">Blogs</a>
-                        </li>
+	<div class="container">
+		<!-- header -->
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="https://hoidanit.vn" target="_blank">@hoidanit</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" aria-current="page" href="../home.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="blog.html">Blogs</a>
+						</li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="../post/post.html">Posts</a>
-                        </li>
+						<li class="nav-item">
+							<a class="nav-link" href="../post/post.html">Posts</a>
+						</li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="../user/user.html">Users</a>
-                        </li>
+						<li class="nav-item">
+							<a class="nav-link" href="../user/user.html">Users</a>
+						</li>
 
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- header -->
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- header -->
 
-        <div class="mt-3">
-            <div class="d-flex justify-content-between align-items-center my-3">
-                <h5>List blogs</h5>
-                <div>
-                    <button class="btn btn-primary">Create a blog</button>
-                </div>
-            </div>
+		<div class="mt-3">
+			<div class="d-flex justify-content-between align-items-center my-3">
+				<h5>List blogs</h5>
+				<div>
+					<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBlog">Create a blog</button>
+				</div>
+			</div>
 
-            <table id="tableBlog" class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>@hoidanit</td>
-                        <td>Otto</td>
-                        <td>
-                            <button class="btn btn-warning">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>@hoidanit</td>
-                        <td>Thornton</td>
-                        <td>
-                            <button class="btn btn-warning">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+			<table id="tableBlog" class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Name</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<!-- Modal Create Blogs-->
+		<div class="modal fade" id="createBlog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Create a new blog</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Title</label>
+							<input type="text" class="form-control" placeholder="Type a title..." name="title">
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Author</label>
+							<input type="text" class="form-control" placeholder="Type a author..." name="author">
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Content</label>
+							<textarea type="text" class="form-control" placeholder="Type a content..." name="content"></textarea>
+						</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
+						<div class="alert alert-danger" role="alert" style="display: none;">
+							Please enter all the required information.
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="btnCreate">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-        crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
 
-    <script type="module" src="../../../../dist//chapter15/th04/blog/blog.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+		integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+		crossorigin="anonymous"></script>
 
+	<script type="module" src="../../../dist/template/blog/blog.js"></script>
 </body>
 
 </html>
