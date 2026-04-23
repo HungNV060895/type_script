@@ -1,4 +1,5 @@
 import { fetchBlogs } from "../../template/blog/display.blog.js";
+import { handleDeleteBlog } from "./delete.blog.js";
 const tableBody = document.querySelector("#tableBlog tbody");
 const toastAdd = new bootstrap.Toast(document.getElementById('addSuccess'), {
     delay: 1000
@@ -6,7 +7,6 @@ const toastAdd = new bootstrap.Toast(document.getElementById('addSuccess'), {
 const modal = new bootstrap.Modal(document.getElementById('createBlog'));
 const btnCreate = document.getElementById('btnCreate');
 const msgError = document.querySelector('.modal-body .alert-danger');
-fetchBlogs();
 //Create blogs
 btnCreate?.addEventListener('click', () => {
     const title = document.querySelector('input[name="title"]').value;
@@ -23,11 +23,9 @@ btnCreate?.addEventListener('click', () => {
                 body: JSON.stringify({ title, author, content })
             });
             const res = await rawResponse.json();
-            console.log(res);
             addNewRow(res);
             toastAdd.show();
             modal.hide();
-            //window.location.reload();
         })();
         msgError.style.display = 'none';
     }
@@ -52,3 +50,27 @@ const addNewRow = (data) => {
     `;
     tableBody?.appendChild(newRow);
 };
+const btnEdit = document.querySelectorAll('.btn-edit');
+btnEdit.forEach((item) => {
+    item.addEventListener('click', (e) => {
+        const target = e.target;
+        const id = target.getAttribute('data-id');
+        const title = target.getAttribute('data-title');
+        const author = target.getAttribute('data-author');
+        const content = target.getAttribute('data-content');
+        const inputTitle = document.querySelector('input[name="title"]');
+        const inputAuthor = document.querySelector('input[name="author"]');
+        const inputContent = document.querySelector('textarea[name="content"]');
+        inputTitle.value = title || '';
+        inputAuthor.value = author || '';
+        inputContent.value = content || '';
+        modal.show();
+        if (id) {
+            console.log(id);
+        }
+    });
+});
+const editBlog = async (id) => {
+};
+await fetchBlogs();
+handleDeleteBlog();

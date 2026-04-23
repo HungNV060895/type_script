@@ -1,4 +1,6 @@
 import { fetchBlogs } from "../../template/blog/display.blog.js";
+import { handleDelete } from "../../todoapp/delete.todo.js";
+import { handleDeleteBlog } from "./delete.blog.js";
 
 declare var bootstrap: any;
 
@@ -16,9 +18,8 @@ const toastAdd = new bootstrap.Toast(document.getElementById('addSuccess'), {
 });
 const modal = new bootstrap.Modal(document.getElementById('createBlog'));
 const btnCreate = document.getElementById('btnCreate') as HTMLButtonElement;
-const msgError = document.querySelector('.modal-body .alert-danger') as HTMLDivElement;
 
-fetchBlogs();
+const msgError = document.querySelector('.modal-body .alert-danger') as HTMLDivElement;
 
 //Create blogs
 btnCreate?.addEventListener('click', () => {
@@ -39,12 +40,10 @@ btnCreate?.addEventListener('click', () => {
             });
 
             const res: IBlog = await rawResponse.json();
-            console.log(res);
 
             addNewRow(res);
             toastAdd.show();
             modal.hide();
-            //window.location.reload();
         })();
         msgError.style.display = 'none';
     }else{
@@ -55,7 +54,6 @@ btnCreate?.addEventListener('click', () => {
         return false;
     }
 })
-
 
 const addNewRow = (data: IBlog) => {
     const newRow = document.createElement('tr');
@@ -71,5 +69,37 @@ const addNewRow = (data: IBlog) => {
     tableBody?.appendChild(newRow);
 }
 
+const btnEdit = document.querySelectorAll('.btn-edit') as NodeListOf<HTMLButtonElement>
+btnEdit.forEach((item) => {
+    item.addEventListener('click', (e) => {
+        const target = e.target as HTMLButtonElement;
+        const id = target.getAttribute('data-id');
+        const title = target.getAttribute('data-title');
+        const author = target.getAttribute('data-author');
+        const content = target.getAttribute('data-content');
+        const inputTitle = document.querySelector('input[name="title"]') as HTMLInputElement;
+        const inputAuthor = document.querySelector('input[name="author"]') as HTMLInputElement;
+        const inputContent = document.querySelector('textarea[name="content"]') as HTMLInputElement;
+
+
+        inputTitle.value = title || '';
+        inputAuthor.value = author || '';
+        inputContent.value = content || '';
+
+        modal.show();
+        if(id){
+            console.log(id);
+        }
+    })
+});
+
+
+const editBlog = async (id: number) => {
+    
+}
+
+
+await fetchBlogs();
+handleDeleteBlog();
 
 export {IBlog}

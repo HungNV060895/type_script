@@ -9,7 +9,11 @@ const fetchBlogs = async () => {
                 <td>${element.title}</td>
                 <td>${element.author}</td>
                 <td>
-                    <button class="btn btn-warning btn-edit" data-id=${element.id}>Edit</button>
+                    <button class="btn btn-warning btn-edit"
+                        data-id=${element.id}
+                        data-title=${JSON.stringify(element.title)}
+                        data-author=${JSON.stringify(element.author)}
+                        data-content=${JSON.stringify(element.content)}>Edit</button>
                     <button class="btn btn-danger btn-delete" data-id=${element.id}>Delete</button>
                 </td>
             </tr>`);
