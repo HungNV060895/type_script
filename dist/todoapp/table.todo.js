@@ -1,8 +1,12 @@
 const todoData = JSON.parse(localStorage.getItem('todos') || '[]');
 const displayTable = () => {
     const tableTodo = document.getElementById('totoTable');
+    if (!tableTodo)
+        return;
+    tableTodo.innerHTML = '';
     if (todoData.length === 0) {
-        tableTodo.innerHTML = 'Empty Task';
+        tableTodo.innerHTML = '<tr><td colspan="4">Empty Task</td></tr>';
+        return;
     }
     todoData.forEach((item) => {
         tableTodo.insertAdjacentHTML('beforeend', `<tr>
